@@ -45,9 +45,12 @@
 
 ```env
 # LLM API Configuration (supports OpenAI SDK compatible APIs)
+# MiroFish uses the OpenAI client internally. 
+# To use other providers like Anthropic (Claude) or Google Gemini, 
+# please use an OpenAI-compatible API gateway such as LiteLLM (https://litellm.ai/).
 LLM_API_KEY=your_api_key
-LLM_BASE_URL=https://dashscope.aliyuncs.com/compatible-mode/v1
-LLM_MODEL_NAME=qwen-plus
+LLM_BASE_URL=https://api.openai.com/v1 # Or your API gateway URL
+LLM_MODEL_NAME=gpt-4o-mini # e.g., claude-3-5-sonnet-latest, gemini-2.0-flash
 
 # Zep Cloud Configuration
 ZEP_API_KEY=your_zep_api_key
