@@ -1,0 +1,214 @@
+{
+  "home": {
+    "nav": {
+      "github": "Visit our Github homepage"
+    },
+    "hero": {
+      "tag": "A simple and versatile group intelligence engine",
+      "version": "/ v0.1-Preview",
+      "title1": "Upload any report",
+      "title2": "to deduce the future instantly",
+      "desc1": "Even with just a piece of text, ",
+      "desc2": " can automatically generate a parallel world of up to a ",
+      "desc3": "million Agents",
+      "desc4": " based on the real-world seeds within. Inject variables from a God's perspective to find the ",
+      "desc5": " 'local optimal solution' ",
+      "desc6": " in complex group interactions.",
+      "slogan": "Let the future be rehearsed among Agent groups, and let decisions prevail after a hundred battles"
+    },
+    "status": {
+      "title": "System Status",
+      "ready": "Ready",
+      "desc": "Prediction engine is on standby, multiple unstructured data can be uploaded to initialize the simulation sequence",
+      "metric1_val": "Low Cost",
+      "metric1_label": "Avg. $5/simulation",
+      "metric2_val": "High Availability",
+      "metric2_label": "Up to 1M Agent simulation"
+    },
+    "workflow": {
+      "title": "Workflow Sequence",
+      "step1_title": "Graph Construction",
+      "step1_desc": "Reality seed extraction & Individual and group memory injection & GraphRAG construction",
+      "step2_title": "Environment Setup",
+      "step2_desc": "Entity relation extraction & Persona generation & Environment configuration Agent injects simulation parameters",
+      "step3_title": "Start Simulation",
+      "step3_desc": "Dual-platform parallel simulation & Automatic analysis of prediction needs & Dynamic update of time-series memory",
+      "step4_title": "Report Generation",
+      "step4_desc": "ReportAgent has a rich toolset to interact deeply with the post-simulation environment",
+      "step5_title": "Deep Interaction",
+      "step5_desc": "Dialogue with any individual in the simulated world & Dialogue with ReportAgent"
+    },
+    "console": {
+      "seed_label": "01 / Reality Seed",
+      "seed_format": "Supported formats: PDF, MD, TXT",
+      "upload_title": "Drag and drop files to upload",
+      "upload_hint": "Or click to browse file system",
+      "input_params": "Input Parameters",
+      "prompt_label": "02 / Simulation Prompt",
+      "prompt_placeholder": "// Enter simulation or prediction requirements in natural language (e.g., What public opinion trends would be triggered if Wuhan University announced the revocation of Xiao's punishment)",
+      "engine_model": "Engine: MiroFish-V1.0",
+      "start_button": "Start Engine",
+      "loading_button": "Initializing..."
+    }
+  },
+  "history": {
+    "title": "Deduction Records",
+    "status": {
+      "graph": "Graph Construction",
+      "env": "Environment Setup",
+      "report": "Analysis Report"
+    },
+    "files": {
+      "more": "+{count} more files",
+      "none": "No files yet",
+      "unknown": "Unknown File"
+    },
+    "unnamed": "Unnamed Simulation",
+    "rounds": "Rounds",
+    "not_started": "Not Started",
+    "loading": "Loading...",
+    "modal": {
+      "requirement": "Simulation Requirement",
+      "no_requirement": "None",
+      "files": "Associated Files",
+      "no_files": "No associated files",
+      "playback_title": "Deduction Playback",
+      "playback_hint": "Step3 'Start Simulation' & Step5 'Deep Interaction' must be initiated during runtime and do not support history playback",
+      "step1": "Graph Construction",
+      "step2": "Environment Setup",
+      "step4": "Analysis Report"
+    }
+  },
+  "process": {
+    "step_name": "Graph Construction",
+    "status": {
+      "error": "Build Failed",
+      "completed": "Build Completed",
+      "building_graph": "Building Graph",
+      "generating_ontology": "Generating Ontology",
+      "initializing": "Initializing"
+    },
+    "graph": {
+      "title": "Real-time Knowledge Graph",
+      "nodes": "Nodes",
+      "edges": "Edges",
+      "refresh": "Refresh Graph",
+      "fullscreen": "Fullscreen",
+      "exit_fullscreen": "Exit Fullscreen",
+      "building_hint": "Updating in real-time...",
+      "loading": "Loading graph data...",
+      "waiting_ontology": "Waiting for ontology generation",
+      "waiting_hint": "Graph construction will start automatically upon completion",
+      "building": "Building graph",
+      "building_hint2": "Data will be displayed shortly...",
+      "waiting_data": "Waiting for graph data..."
+    },
+    "details": {
+      "node_title": "Node Details",
+      "edge_title": "Relationship",
+      "name": "Name",
+      "uuid": "UUID",
+      "created": "Created",
+      "properties": "Properties",
+      "summary": "Summary",
+      "labels": "Labels",
+      "source": "Source",
+      "target": "Target",
+      "label": "Label",
+      "type": "Type",
+      "fact": "Fact",
+      "episodes": "Episodes",
+      "valid_from": "Valid From",
+      "invalid_at": "Invalid At",
+      "expired_at": "Expired At"
+    },
+    "build": {
+      "title": "Build Process",
+      "phase1_title": "Ontology Generation",
+      "phase1_desc": "After uploading documents, LLM analyzes the content to automatically generate an ontology (entity types + relation types) suitable for public opinion simulation.",
+      "phase1_progress": "Generation Progress",
+      "phase1_progress_message": "Analyzing document and generating ontology...",
+      "phase1_entity_types": "Generated Entity Types",
+      "phase1_relation_types": "Generated Relation Types",
+      "phase1_more_relations": "+{count} more relations...",
+      "phase1_waiting": "Waiting for ontology generation...",
+      "phase2_title": "Graph Construction",
+      "phase2_desc": "Based on the generated ontology, documents are chunked to call the Zep API to build the knowledge graph, extracting entities and relations.",
+      "phase2_waiting": "Waiting for ontology generation to complete...",
+      "phase2_progress": "Build Progress",
+      "phase2_result": "Build Result",
+      "phase2_nodes": "Entity Nodes",
+      "phase2_edges": "Relation Edges",
+      "phase2_entity_types": "Entity Types",
+      "phase3_title": "Build Complete",
+      "phase3_desc": "Ready for the next step",
+      "next_step": "Proceed to Environment Setup"
+    },
+    "project": {
+      "title": "Project Information",
+      "name": "Project Name",
+      "id": "Project ID",
+      "graph_id": "Graph ID",
+      "requirement": "Simulation Requirement"
+    },
+    "status_text": {
+      "completed": "Completed",
+      "active": "In Progress",
+      "pending": "Pending"
+    },
+    "no_files_error": "No files to upload, please return to the homepage and try again."
+  },
+  "main": {
+    "view": {
+      "graph": "Graph",
+      "split": "Split",
+      "workbench": "Workbench"
+    },
+    "steps": {
+      "step1": "Graph Construction",
+      "step2": "Environment Setup",
+      "step3": "Start Simulation",
+      "step4": "Report Generation",
+      "step5": "Deep Interaction"
+    },
+    "status": {
+      "error": "Error",
+      "ready": "Ready",
+      "building": "Building Graph",
+      "generating": "Generating Ontology",
+      "initializing": "Initializing"
+    },
+    "log": {
+      "entering_step": "Entering Step {step}: {name}",
+      "custom_rounds": "Custom simulation rounds: {rounds} rounds"
+    }
+  },
+  "graph_panel": {
+    "title": "Graph Relationship Visualization",
+    "refresh": "Refresh",
+    "maximize": "Maximize/Restore",
+    "simulating_hint": "GraphRAG long-term and short-term memory is updating in real-time",
+    "updating_hint": "Updating in real-time...",
+    "finished_hint": "A small amount of content is still being processed, it is recommended to manually refresh the graph later",
+    "close_hint": "Close hint",
+    "node_details": "Node Details",
+    "relationship": "Relationship",
+    "name": "Name",
+    "uuid": "UUID",
+    "created": "Created",
+    "properties": "Properties",
+    "summary": "Summary",
+    "labels": "Labels",
+    "fact": "Fact",
+    "type": "Type",
+    "episodes": "Episodes",
+    "valid_from": "Valid From",
+    "self_relations": "Self Relations",
+    "items": "items",
+    "related": "RELATED",
+    "loading": "Loading graph data...",
+    "waiting": "Waiting for ontology generation...",
+    "entity_types": "Entity Types",
+    "show_edge_labels": "Show Edge Labels"
+  }
+}

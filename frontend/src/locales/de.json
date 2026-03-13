@@ -1,0 +1,216 @@
+{
+  "home": {
+    "nav": {
+      "github": "Besuchen Sie unsere Github-Homepage"
+    },
+    "hero": {
+      "tag": "Eine einfache und vielseitige Schwarmintelligenz-Engine",
+      "version": "/ v0.1-Vorschau",
+      "title1": "Laden Sie einen beliebigen Bericht hoch",
+      "title2": "um die Zukunft sofort abzuleiten",
+      "desc1": "Schon mit einem Textstück ",
+      "desc2": " kann ",
+      "desc3": "MiroFish",
+      "desc4": " automatisch eine Parallelwelt von bis zu einer ",
+      "desc5": "Million Agenten",
+      "desc6": " basierend auf den realen Saatgutdaten generieren. Injizieren Sie Variablen aus einer Gott-Perspektive, um die ",
+      "desc7": " 'lokale optimale Lösung' ",
+      "desc8": " in komplexen Gruppeninteraktionen zu finden.",
+      "slogan": "Lassen Sie die Zukunft in Agentengruppen einüben und lassen Sie Entscheidungen nach hundert Schlachten triumphieren"
+    },
+    "status": {
+      "title": "Systemstatus",
+      "ready": "Bereit",
+      "desc": "Die Vorhersage-Engine ist im Standby. Mehrere unstrukturierte Daten können hochgeladen werden, um die Simulationssequenz zu initialisieren",
+      "metric1_val": "Niedrige Kosten",
+      "metric1_label": "Durchschn. $5/Simulation",
+      "metric2_val": "Hohe Verfügbarkeit",
+      "metric2_label": "Bis zu 1M Agentensimulation"
+    },
+    "workflow": {
+      "title": "Arbeitsablauf",
+      "step1_title": "Graph-Konstruktion",
+      "step1_desc": "Extraktion von Realitätssaat & Injektion von individuellem und Gruppengedächtnis & GraphRAG-Konstruktion",
+      "step2_title": "Umgebungs-Setup",
+      "step2_desc": "Extraktion von Entitätsbeziehungen & Personagenerierung & Umgebungskonfiguration. Agenten injizieren Simulationsparameter",
+      "step3_title": "Simulation starten",
+      "step3_desc": "Parallele Dual-Plattform-Simulation & Automatische Analyse von Vorhersagebedürfnissen & Dynamische Aktualisierung des Zeitreihengedächtnisses",
+      "step4_title": "Berichterstellung",
+      "step4_desc": "ReportAgent verfügt über ein reichhaltiges Toolset für die tiefe Interaktion mit der Post-Simulationsumgebung",
+      "step5_title": "Tiefe Interaktion",
+      "step5_desc": "Dialog mit jedem Individuum in der simulierten Welt & Dialog mit ReportAgent"
+    },
+    "console": {
+      "seed_label": "01 / Realitätssaat",
+      "seed_format": "Unterstützte Formate: PDF, MD, TXT",
+      "upload_title": "Dateien hierhin ziehen",
+      "upload_hint": "Oder klicken, um das Dateisystem zu durchsuchen",
+      "input_params": "Eingabeparameter",
+      "prompt_label": "02 / Simulations-Prompt",
+      "prompt_placeholder": "// Geben Sie Simulations- oder Vorhersageanforderungen in natürlicher Sprache ein (z. B. Welche öffentlichen Meinungstrends würden ausgelöst, wenn die Wuhan University die Aufhebung der Bestrafung von Xiao bekannt gäbe)",
+      "engine_model": "Engine: MiroFish-V1.0",
+      "start_button": "Engine starten",
+      "loading_button": "Initialisierung..."
+    }
+  },
+  "history": {
+    "title": "Deduktionsaufzeichnungen",
+    "status": {
+      "graph": "Graph-Konstruktion",
+      "env": "Umgebungs-Setup",
+      "report": "Analysebericht"
+    },
+    "files": {
+      "more": "+{count} weitere Dateien",
+      "none": "Noch keine Dateien",
+      "unknown": "Unbekannte Datei"
+    },
+    "unnamed": "Unbenannte Simulation",
+    "rounds": "Runden",
+    "not_started": "Nicht gestartet",
+    "loading": "Lädt...",
+    "modal": {
+      "requirement": "Simulationsanforderung",
+      "no_requirement": "Keine",
+      "files": "Zugehörige Dateien",
+      "no_files": "Keine zugehörigen Dateien",
+      "playback_title": "Deduktionswiedergabe",
+      "playback_hint": "Schritt 3 'Simulation starten' & Schritt 5 'Tiefe Interaktion' müssen zur Laufzeit initiiert werden und unterstützen keine historische Wiedergabe",
+      "step1": "Graph-Konstruktion",
+      "step2": "Umgebungs-Setup",
+      "step4": "Analysebericht"
+    }
+  },
+  "process": {
+    "step_name": "Graph-Konstruktion",
+    "status": {
+      "error": "Build fehlgeschlagen",
+      "completed": "Build abgeschlossen",
+      "building_graph": "Graph wird erstellt",
+      "generating_ontology": "Ontologie wird generiert",
+      "initializing": "Initialisierung"
+    },
+    "graph": {
+      "title": "Echtzeit-Wissensgraph",
+      "nodes": "Knoten",
+      "edges": "Kanten",
+      "refresh": "Graph aktualisieren",
+      "fullscreen": "Vollbild",
+      "exit_fullscreen": "Vollbild beenden",
+      "building_hint": "Aktualisierung in Echtzeit...",
+      "loading": "Graphdaten werden geladen...",
+      "waiting_ontology": "Warten auf Ontologie-Generierung",
+      "waiting_hint": "Graph-Konstruktion startet automatisch nach Abschluss",
+      "building": "Graph wird erstellt",
+      "building_hint2": "Daten werden in Kürze angezeigt...",
+      "waiting_data": "Warten auf Graphdaten..."
+    },
+    "details": {
+      "node_title": "Knotendetails",
+      "edge_title": "Beziehung",
+      "name": "Name",
+      "uuid": "UUID",
+      "created": "Erstellt am",
+      "properties": "Eigenschaften",
+      "summary": "Zusammenfassung",
+      "labels": "Label",
+      "source": "Quelle",
+      "target": "Ziel",
+      "label": "Label",
+      "type": "Typ",
+      "fact": "Fakt",
+      "episodes": "Episoden",
+      "valid_from": "Gültig ab",
+      "invalid_at": "Ungültig am",
+      "expired_at": "Abgelaufen am"
+    },
+    "build": {
+      "title": "Build-Prozess",
+      "phase1_title": "Ontologie-Generierung",
+      "phase1_desc": "Nach dem Hochladen der Dokumente analysiert das LLM den Inhalt, um automatisch eine für die Simulation der öffentlichen Meinung geeignete Ontologie (Entitätstypen + Beziehungstypen) zu generieren.",
+      "phase1_progress": "Generierungsfortschritt",
+      "phase1_progress_message": "Analysiere Dokument und generiere Ontologie...",
+      "phase1_entity_types": "Generierte Entitätstypen",
+      "phase1_relation_types": "Generierte Beziehungstypen",
+      "phase1_more_relations": "+{count} weitere Beziehungen...",
+      "phase1_waiting": "Warten auf Ontologie-Generierung...",
+      "phase2_title": "Graph-Konstruktion",
+      "phase2_desc": "Basierend auf der generierten Ontologie werden die Dokumente unterteilt, um die Zep-API aufzurufen und den Wissensgraph zu erstellen, wobei Entitäten und Beziehungen extrahiert werden.",
+      "phase2_waiting": "Warten auf Abschluss der Ontologie-Generierung...",
+      "phase2_progress": "Build-Fortschritt",
+      "phase2_result": "Build-Ergebnis",
+      "phase2_nodes": "Entitätsknoten",
+      "phase2_edges": "Beziehungskanten",
+      "phase2_entity_types": "Entitätstypen",
+      "phase3_title": "Build abgeschlossen",
+      "phase3_desc": "Bereit für den nächsten Schritt",
+      "next_step": "Weiter zum Umgebungs-Setup"
+    },
+    "project": {
+      "title": "Projektinformationen",
+      "name": "Projektname",
+      "id": "Projekt-ID",
+      "graph_id": "Graph-ID",
+      "requirement": "Simulationsanforderung"
+    },
+    "status_text": {
+      "completed": "Abgeschlossen",
+      "active": "In Bearbeitung",
+      "pending": "Ausstehend"
+    },
+    "no_files_error": "Keine Dateien zum Hochladen, bitte zur Startseite zurückkehren und erneut versuchen."
+  },
+  "main": {
+    "view": {
+      "graph": "Graph",
+      "split": "Geteilt",
+      "workbench": "Workbench"
+    },
+    "steps": {
+      "step1": "Graph-Konstruktion",
+      "step2": "Umgebungs-Setup",
+      "step3": "Simulation starten",
+      "step4": "Berichterstellung",
+      "step5": "Tiefe Interaktion"
+    },
+    "status": {
+      "error": "Fehler",
+      "ready": "Bereit",
+      "building": "Graph wird erstellt",
+      "generating": "Ontologie wird generiert",
+      "initializing": "Initialisierung"
+    },
+    "log": {
+      "entering_step": "Schritt {step} wird betreten: {name}",
+      "custom_rounds": "Benutzerdefinierte Simulationsrunden: {rounds} Runden"
+    }
+  },
+  "graph_panel": {
+    "title": "Graph-Beziehungsvisualisierung",
+    "refresh": "Aktualisieren",
+    "maximize": "Maximieren/Wiederherstellen",
+    "simulating_hint": "Das Kurz- und Langzeitgedächtnis des GraphRAG wird in Echtzeit aktualisiert",
+    "updating_hint": "Aktualisierung in Echtzeit...",
+    "finished_hint": "Eine kleine Menge an Inhalten wird noch verarbeitet, es wird empfohlen, den Graphen später manuell zu aktualisieren",
+    "close_hint": "Hinweis schließen",
+    "node_details": "Knotendetails",
+    "relationship": "Beziehung",
+    "name": "Name",
+    "uuid": "UUID",
+    "created": "Erstellt am",
+    "properties": "Eigenschaften",
+    "summary": "Zusammenfassung",
+    "labels": "Label",
+    "fact": "Fakt",
+    "type": "Typ",
+    "episodes": "Episoden",
+    "valid_from": "Gültig ab",
+    "self_relations": "Selbstbeziehungen",
+    "items": "Elemente",
+    "related": "BEZOGEN AUF",
+    "loading": "Graphdaten werden geladen...",
+    "waiting": "Warten auf Ontologie-Generierung...",
+    "entity_types": "Entitätstypen",
+    "show_edge_labels": "Kanten-Label anzeigen"
+  }
+}

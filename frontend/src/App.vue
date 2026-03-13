@@ -1,13 +1,16 @@
 <template>
-  <router-view />
+  <div class="app-container">
+    <LanguageSwitcher class="language-switcher-container" />
+    <router-view />
+  </div>
 </template>
 
 <script setup>
-// 使用 Vue Router 来管理页面
+import LanguageSwitcher from './components/LanguageSwitcher.vue'
 </script>
 
 <style>
-/* 全局样式重置 */
+/* Global styles remain the same */
 * {
   margin: 0;
   padding: 0;
@@ -22,7 +25,18 @@
   background-color: #ffffff;
 }
 
-/* 滚动条样式 */
+.app-container {
+  position: relative;
+}
+
+.language-switcher-container {
+  position: fixed;
+  top: 15px;
+  right: 150px;
+  z-index: 9999;
+}
+
+/* Scrollbar styles remain the same */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
@@ -40,7 +54,6 @@
   background: #333333;
 }
 
-/* 全局按钮样式 */
 button {
   font-family: inherit;
 }

@@ -1,3 +1,48 @@
+...
+<script setup>
+import { ref, computed, onMounted, onUnmounted, watch, nextTick } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
+import { generateOntology, getProject, buildGraph, getTaskStatus, getGraphData } from '../api/graph'
+import { getPendingUpload, clearPendingUpload } from '../store/pendingUpload'
+import * as d3 from 'd3'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
+const route = useRoute()
+...
+const statusText = computed(() => {
+  if (error.value) return t('process.status.error')
+  if (currentPhase.value >= 2) return t('process.status.completed')
+  if (currentPhase.value === 1) return t('process.status.building_graph')
+  if (currentPhase.value === 0) return t('process.status.generating_ontology')
+  return t('process.status.initializing')
+})
+...
+const goToNextStep = () => {
+  // TODO: 进入环境搭建步骤
+  alert(t('process.build.next_step') + '...')
+}
+...
+const getPhaseStatusText = (phase) => {
+  if (currentPhase.value > phase) return t('process.status_text.completed')
+  if (currentPhase.value === phase) {
+    if (phase === 1 && buildProgress.value) {
+      return `${buildProgress.value.progress}%`
+    }
+    return t('process.status_text.active')
+  }
+  return t('process.status_text.pending')
+}
+...
+const handleNewProject = async () => {
+  const pending = getPendingUpload()
+  
+  if (!pending.isPending || pending.files.length === 0) {
+    error.value = t('process.no_files_error')
+    loading.value = false
+    return
+  }
+...
 <template>
   <div class="process-page">
     <!-- 顶部导航栏 -->
@@ -7,7 +52,7 @@
       <!-- 中间步骤指示器 -->
       <div class="nav-center">
         <div class="step-badge">STEP 01</div>
-        <div class="step-name">图谱构建</div>
+        <div class="step-name">{{ $t('process.step_name') }}</div>
       </div>
 
       <div class="nav-status">
@@ -23,20 +68,20 @@
         <div class="panel-header">
           <div class="header-left">
             <span class="header-deco">◆</span>
-            <span class="header-title">实时知识图谱</span>
+            <span class="header-title">{{ $t('process.graph.title') }}</span>
           </div>
           <div class="header-right">
             <template v-if="graphData">
-              <span class="stat-item">{{ graphData.node_count || graphData.nodes?.length || 0 }} 节点</span>
+              <span class="stat-item">{{ graphData.node_count || graphData.nodes?.length || 0 }} {{ $t('process.graph.nodes') }}</span>
               <span class="stat-divider">|</span>
-              <span class="stat-item">{{ graphData.edge_count || graphData.edges?.length || 0 }} 关系</span>
+              <span class="stat-item">{{ graphData.edge_count || graphData.edges?.length || 0 }} {{ $t('process.graph.edges') }}</span>
               <span class="stat-divider">|</span>
             </template>
             <div class="action-buttons">
-                <button class="action-btn" @click="refreshGraph" :disabled="graphLoading" title="刷新图谱">
+                <button class="action-btn" @click="refreshGraph" :disabled="graphLoading" :title="$t('process.graph.refresh')">
                   <span class="icon-refresh" :class="{ 'spinning': graphLoading }">↻</span>
                 </button>
-                <button class="action-btn" @click="toggleFullScreen" :title="isFullScreen ? '退出全屏' : '全屏显示'">
+                <button class="action-btn" @click="toggleFullScreen" :title="isFullScreen ? $t('process.graph.exit_fullscreen') : $t('process.graph.fullscreen')">
                   <span class="icon-fullscreen">{{ isFullScreen ? '↙' : '↗' }}</span>
                 </button>
             </div>
@@ -50,13 +95,13 @@
             <!-- 构建中提示 -->
             <div v-if="currentPhase === 1" class="graph-building-hint">
               <span class="building-dot"></span>
-              实时更新中...
+              {{ $t('process.graph.building_hint') }}
             </div>
             
             <!-- 节点/边详情面板 -->
             <div v-if="selectedItem" class="detail-panel">
               <div class="detail-panel-header">
-                <span class="detail-title">{{ selectedItem.type === 'node' ? 'Node Details' : 'Relationship' }}</span>
+                <span class="detail-title">{{ selectedItem.type === 'node' ? $t('process.details.node_title') : $t('process.details.edge_title') }}</span>
                 <span v-if="selectedItem.type === 'node'" class="detail-badge" :style="{ background: selectedItem.color }">
                   {{ selectedItem.entityType }}
                 </span>
@@ -66,21 +111,21 @@
               <!-- 节点详情 -->
               <div v-if="selectedItem.type === 'node'" class="detail-content">
                 <div class="detail-row">
-                  <span class="detail-label">Name:</span>
+                  <span class="detail-label">{{ $t('process.details.name') }}:</span>
                   <span class="detail-value highlight">{{ selectedItem.data.name }}</span>
                 </div>
                 <div class="detail-row">
-                  <span class="detail-label">UUID:</span>
+                  <span class="detail-label">{{ $t('process.details.uuid') }}:</span>
                   <span class="detail-value uuid">{{ selectedItem.data.uuid }}</span>
                 </div>
                 <div class="detail-row" v-if="selectedItem.data.created_at">
-                  <span class="detail-label">Created:</span>
+                  <span class="detail-label">{{ $t('process.details.created') }}:</span>
                   <span class="detail-value">{{ formatDate(selectedItem.data.created_at) }}</span>
                 </div>
                 
                 <!-- Properties / Attributes -->
                 <div class="detail-section" v-if="selectedItem.data.attributes && Object.keys(selectedItem.data.attributes).length > 0">
-                  <span class="detail-label">Properties:</span>
+                  <span class="detail-label">{{ $t('process.details.properties') }}:</span>
                   <div class="properties-list">
                     <div v-for="(value, key) in selectedItem.data.attributes" :key="key" class="property-item">
                       <span class="property-key">{{ key }}:</span>
@@ -91,13 +136,13 @@
                 
                 <!-- Summary -->
                 <div class="detail-section" v-if="selectedItem.data.summary">
-                  <span class="detail-label">Summary:</span>
+                  <span class="detail-label">{{ $t('process.details.summary') }}:</span>
                   <p class="detail-summary">{{ selectedItem.data.summary }}</p>
                 </div>
                 
                 <!-- Labels -->
                 <div class="detail-row" v-if="selectedItem.data.labels?.length">
-                  <span class="detail-label">Labels:</span>
+                  <span class="detail-label">{{ $t('process.details.labels') }}:</span>
                   <div class="detail-labels">
                     <span v-for="label in selectedItem.data.labels" :key="label" class="label-tag">{{ label }}</span>
                   </div>
@@ -115,49 +160,49 @@
                   <span class="edge-target">{{ selectedItem.data.target_name || selectedItem.data.target_node_name }}</span>
                 </div>
                 
-                <div class="detail-subtitle">Relationship</div>
+                <div class="detail-subtitle">{{ $t('process.details.edge_title') }}</div>
                 
                 <div class="detail-row">
-                  <span class="detail-label">UUID:</span>
+                  <span class="detail-label">{{ $t('process.details.uuid') }}:</span>
                   <span class="detail-value uuid">{{ selectedItem.data.uuid }}</span>
                 </div>
                 <div class="detail-row">
-                  <span class="detail-label">Label:</span>
+                  <span class="detail-label">{{ $t('process.details.label') }}:</span>
                   <span class="detail-value">{{ selectedItem.data.name || selectedItem.data.fact_type || 'RELATED_TO' }}</span>
                 </div>
                 <div class="detail-row" v-if="selectedItem.data.fact_type">
-                  <span class="detail-label">Type:</span>
+                  <span class="detail-label">{{ $t('process.details.type') }}:</span>
                   <span class="detail-value">{{ selectedItem.data.fact_type }}</span>
                 </div>
                 
                 <!-- Fact -->
                 <div class="detail-section" v-if="selectedItem.data.fact">
-                  <span class="detail-label">Fact:</span>
+                  <span class="detail-label">{{ $t('process.details.fact') }}:</span>
                   <p class="detail-summary">{{ selectedItem.data.fact }}</p>
                 </div>
                 
                 <!-- Episodes -->
                 <div class="detail-section" v-if="selectedItem.data.episodes?.length">
-                  <span class="detail-label">Episodes:</span>
+                  <span class="detail-label">{{ $t('process.details.episodes') }}:</span>
                   <div class="episodes-list">
                     <span v-for="ep in selectedItem.data.episodes" :key="ep" class="episode-tag">{{ ep }}</span>
                   </div>
                 </div>
                 
                 <div class="detail-row" v-if="selectedItem.data.created_at">
-                  <span class="detail-label">Created:</span>
+                  <span class="detail-label">{{ $t('process.details.created') }}:</span>
                   <span class="detail-value">{{ formatDate(selectedItem.data.created_at) }}</span>
                 </div>
                 <div class="detail-row" v-if="selectedItem.data.valid_at">
-                  <span class="detail-label">Valid From:</span>
+                  <span class="detail-label">{{ $t('process.details.valid_from') }}:</span>
                   <span class="detail-value">{{ formatDate(selectedItem.data.valid_at) }}</span>
                 </div>
                 <div class="detail-row" v-if="selectedItem.data.invalid_at">
-                  <span class="detail-label">Invalid At:</span>
+                  <span class="detail-label">{{ $t('process.details.invalid_at') }}:</span>
                   <span class="detail-value">{{ formatDate(selectedItem.data.invalid_at) }}</span>
                 </div>
                 <div class="detail-row" v-if="selectedItem.data.expired_at">
-                  <span class="detail-label">Expired At:</span>
+                  <span class="detail-label">{{ $t('process.details.expired_at') }}:</span>
                   <span class="detail-value">{{ formatDate(selectedItem.data.expired_at) }}</span>
                 </div>
               </div>
@@ -171,7 +216,7 @@
               <div class="loading-ring"></div>
               <div class="loading-ring"></div>
             </div>
-            <p class="loading-text">图谱数据加载中...</p>
+            <p class="loading-text">{{ $t('process.graph.loading') }}</p>
           </div>
           
           <!-- 等待构建 -->
@@ -189,8 +234,8 @@
                 <line x1="50" y1="72" x2="74" y2="66" stroke="#000" stroke-width="1"/>
               </svg>
             </div>
-            <p class="waiting-text">等待本体生成</p>
-            <p class="waiting-hint">生成完成后将自动开始构建图谱</p>
+            <p class="waiting-text">{{ $t('process.graph.waiting_ontology') }}</p>
+            <p class="waiting-hint">{{ $t('process.graph.waiting_hint') }}</p>
           </div>
           
           <!-- 构建中但还没有数据 -->
@@ -200,8 +245,8 @@
               <div class="loading-ring"></div>
               <div class="loading-ring"></div>
             </div>
-            <p class="waiting-text">图谱构建中</p>
-            <p class="waiting-hint">数据即将显示...</p>
+            <p class="waiting-text">{{ $t('process.graph.building') }}</p>
+            <p class="waiting-hint">{{ $t('process.graph.building_hint2') }}</p>
           </div>
           
           <!-- 错误状态 -->
@@ -225,7 +270,7 @@
       <div class="right-panel" :class="{ 'hidden': isFullScreen }">
         <div class="panel-header dark-header">
           <span class="header-icon">▣</span>
-          <span class="header-title">构建流程</span>
+          <span class="header-title">{{ $t('process.build.title') }}</span>
         </div>
 
         <div class="process-content">
@@ -234,7 +279,7 @@
             <div class="phase-header">
               <span class="phase-num">01</span>
               <div class="phase-info">
-                <div class="phase-title">本体生成</div>
+                <div class="phase-title">{{ $t('process.build.phase1_title') }}</div>
                 <div class="phase-api">/api/graph/ontology/generate</div>
               </div>
               <span class="phase-status" :class="getPhaseStatusClass(0)">
@@ -244,15 +289,15 @@
             
             <div class="phase-detail">
               <div class="detail-section">
-                <div class="detail-label">接口说明</div>
+                <div class="detail-label">{{ $t('process.details.type') }}</div>
                 <div class="detail-content">
-                  上传文档后，LLM分析文档内容，自动生成适合舆论模拟的本体结构（实体类型 + 关系类型）
+                  {{ $t('process.build.phase1_desc') }}
                 </div>
               </div>
               
               <!-- 本体生成进度 -->
               <div class="detail-section" v-if="ontologyProgress && currentPhase === 0">
-                <div class="detail-label">生成进度</div>
+                <div class="detail-label">{{ $t('process.build.phase1_progress') }}</div>
                 <div class="ontology-progress">
                   <div class="progress-spinner"></div>
                   <span class="progress-text">{{ ontologyProgress.message }}</span>
@@ -261,7 +306,7 @@
               
               <!-- 已生成的本体信息 -->
               <div class="detail-section" v-if="projectData?.ontology">
-                <div class="detail-label">生成的实体类型 ({{ projectData.ontology.entity_types?.length || 0 }})</div>
+                <div class="detail-label">{{ $t('process.build.phase1_entity_types') }} ({{ projectData.ontology.entity_types?.length || 0 }})</div>
                 <div class="entity-tags">
                   <span 
                     v-for="entity in projectData.ontology.entity_types" 
@@ -274,7 +319,7 @@
               </div>
               
               <div class="detail-section" v-if="projectData?.ontology">
-                <div class="detail-label">生成的关系类型 ({{ projectData.ontology.relation_types?.length || 0 }})</div>
+                <div class="detail-label">{{ $t('process.build.phase1_relation_types') }} ({{ projectData.ontology.relation_types?.length || 0 }})</div>
                 <div class="relation-list">
                   <div 
                     v-for="(rel, idx) in projectData.ontology.relation_types?.slice(0, 5) || []" 
@@ -288,14 +333,14 @@
                     <span class="rel-target">{{ rel.target_type }}</span>
                   </div>
                   <div v-if="(projectData.ontology.relation_types?.length || 0) > 5" class="relation-more">
-                    +{{ projectData.ontology.relation_types.length - 5 }} 更多关系...
+                    {{ $t('process.build.phase1_more_relations', { count: projectData.ontology.relation_types.length - 5 }) }}
                   </div>
                 </div>
               </div>
               
               <!-- 等待状态 -->
               <div class="detail-section waiting-state" v-if="!projectData?.ontology && currentPhase === 0 && !ontologyProgress">
-                <div class="waiting-hint">等待本体生成...</div>
+                <div class="waiting-hint">{{ $t('process.build.phase1_waiting') }}</div>
               </div>
             </div>
           </div>
@@ -305,7 +350,7 @@
             <div class="phase-header">
               <span class="phase-num">02</span>
               <div class="phase-info">
-                <div class="phase-title">图谱构建</div>
+                <div class="phase-title">{{ $t('process.build.phase2_title') }}</div>
                 <div class="phase-api">/api/graph/build</div>
               </div>
               <span class="phase-status" :class="getPhaseStatusClass(1)">
@@ -315,20 +360,20 @@
             
             <div class="phase-detail">
               <div class="detail-section">
-                <div class="detail-label">接口说明</div>
+                <div class="detail-label">{{ $t('process.details.type') }}</div>
                 <div class="detail-content">
-                  基于生成的本体，将文档分块后调用 Zep API 构建知识图谱，提取实体和关系
+                  {{ $t('process.build.phase2_desc') }}
                 </div>
               </div>
               
               <!-- 等待本体完成 -->
               <div class="detail-section waiting-state" v-if="currentPhase < 1">
-                <div class="waiting-hint">等待本体生成完成...</div>
+                <div class="waiting-hint">{{ $t('process.build.phase2_waiting') }}</div>
               </div>
               
               <!-- 构建进度 -->
               <div class="detail-section" v-if="buildProgress && currentPhase >= 1">
-                <div class="detail-label">构建进度</div>
+                <div class="detail-label">{{ $t('process.build.phase2_progress') }}</div>
                 <div class="progress-bar">
                   <div class="progress-fill" :style="{ width: buildProgress.progress + '%' }"></div>
                 </div>
@@ -339,19 +384,19 @@
               </div>
               
               <div class="detail-section" v-if="graphData">
-                <div class="detail-label">构建结果</div>
+                <div class="detail-label">{{ $t('process.build.phase2_result') }}</div>
                 <div class="build-result">
                   <div class="result-item">
                     <span class="result-value">{{ graphData.node_count }}</span>
-                    <span class="result-label">实体节点</span>
+                    <span class="result-label">{{ $t('process.build.phase2_nodes') }}</span>
                   </div>
                   <div class="result-item">
                     <span class="result-value">{{ graphData.edge_count }}</span>
-                    <span class="result-label">关系边</span>
+                    <span class="result-label">{{ $t('process.build.phase2_edges') }}</span>
                   </div>
                   <div class="result-item">
                     <span class="result-value">{{ entityTypes.length }}</span>
-                    <span class="result-label">实体类型</span>
+                    <span class="result-label">{{ $t('process.build.phase2_entity_types') }}</span>
                   </div>
                 </div>
               </div>
@@ -363,8 +408,8 @@
             <div class="phase-header">
               <span class="phase-num">03</span>
               <div class="phase-info">
-                <div class="phase-title">构建完成</div>
-                <div class="phase-api">准备进入下一步骤</div>
+                <div class="phase-title">{{ $t('process.build.phase3_title') }}</div>
+                <div class="phase-api">{{ $t('process.build.phase3_desc') }}</div>
               </div>
               <span class="phase-status" :class="getPhaseStatusClass(2)">
                 {{ getPhaseStatusText(2) }}
@@ -375,7 +420,7 @@
           <!-- 下一步按钮 -->
           <div class="next-step-section" v-if="currentPhase >= 2">
             <button class="next-step-btn" @click="goToNextStep" :disabled="currentPhase < 2">
-              进入环境搭建
+              {{ $t('process.build.next_step') }}
               <span class="btn-arrow">→</span>
             </button>
           </div>
@@ -385,23 +430,23 @@
         <div class="project-panel">
           <div class="project-header">
             <span class="project-icon">◇</span>
-            <span class="project-title">项目信息</span>
+            <span class="project-title">{{ $t('process.project.title') }}</span>
           </div>
           <div class="project-details" v-if="projectData">
             <div class="project-item">
-              <span class="item-label">项目名称</span>
+              <span class="item-label">{{ $t('process.project.name') }}</span>
               <span class="item-value">{{ projectData.name }}</span>
             </div>
             <div class="project-item">
-              <span class="item-label">项目ID</span>
+              <span class="item-label">{{ $t('process.project.id') }}</span>
               <span class="item-value code">{{ projectData.project_id }}</span>
             </div>
             <div class="project-item" v-if="projectData.graph_id">
-              <span class="item-label">图谱ID</span>
+              <span class="item-label">{{ $t('process.project.graph_id') }}</span>
               <span class="item-value code">{{ projectData.graph_id }}</span>
             </div>
             <div class="project-item">
-              <span class="item-label">模拟需求</span>
+              <span class="item-label">{{ $t('process.project.requirement') }}</span>
               <span class="item-value">{{ projectData.simulation_requirement || '-' }}</span>
             </div>
           </div>

@@ -1,0 +1,214 @@
+{
+  "home": {
+    "nav": {
+      "github": "访问我们的Github主页"
+    },
+    "hero": {
+      "tag": "简洁通用的群体智能引擎",
+      "version": "/ v0.1-预览版",
+      "title1": "上传任意报告",
+      "title2": "即刻推演未来",
+      "desc1": "即使只有一段文字，",
+      "desc2": " 也能基于其中的现实种子，全自动生成与之对应的至多",
+      "desc3": "百万级Agent",
+      "desc4": "构成的平行世界。通过上帝视角注入变量，在复杂的群体交互中寻找动态环境下的",
+      "desc5": "“局部最优解”",
+      "desc6": "。",
+      "slogan": "让未来在 Agent 群中预演，让决策在百战后胜出"
+    },
+    "status": {
+      "title": "系统状态",
+      "ready": "准备就绪",
+      "desc": "预测引擎待命中，可上传多份非结构化数据以初始化模拟序列",
+      "metric1_val": "低成本",
+      "metric1_label": "常规模拟平均5$/次",
+      "metric2_val": "高可用",
+      "metric2_label": "最多百万级Agent模拟"
+    },
+    "workflow": {
+      "title": "工作流序列",
+      "step1_title": "图谱构建",
+      "step1_desc": "现实种子提取 & 个体与群体记忆注入 & GraphRAG构建",
+      "step2_title": "环境搭建",
+      "step2_desc": "实体关系抽取 & 人设生成 & 环境配置Agent注入仿真参数",
+      "step3_title": "开始模拟",
+      "step3_desc": "双平台并行模拟 & 自动解析预测需求 & 动态更新时序记忆",
+      "step4_title": "报告生成",
+      "step4_desc": "ReportAgent拥有丰富的工具集与模拟后环境进行深度交互",
+      "step5_title": "深度互动",
+      "step5_desc": "与模拟世界中的任意一位进行对话 & 与ReportAgent进行对话"
+    },
+    "console": {
+      "seed_label": "01 / 现实种子",
+      "seed_format": "支持格式: PDF, MD, TXT",
+      "upload_title": "拖拽文件上传",
+      "upload_hint": "或点击浏览文件系统",
+      "input_params": "输入参数",
+      "prompt_label": ">_ 02 / 模拟提示词",
+      "prompt_placeholder": "// 用自然语言输入模拟或预测需求（例.武大若发布撤销肖某处分的公告，会引发什么舆情走向）",
+      "engine_model": "引擎: MiroFish-V1.0",
+      "start_button": "启动引擎",
+      "loading_button": "初始化中..."
+    }
+  },
+  "history": {
+    "title": "推演记录",
+    "status": {
+      "graph": "图谱构建",
+      "env": "环境搭建",
+      "report": "分析报告"
+    },
+    "files": {
+      "more": "+{count} 个文件",
+      "none": "暂无文件",
+      "unknown": "未知文件"
+    },
+    "unnamed": "未命名模拟",
+    "rounds": "轮",
+    "not_started": "未开始",
+    "loading": "加载中...",
+    "modal": {
+      "requirement": "模拟需求",
+      "no_requirement": "无",
+      "files": "关联文件",
+      "no_files": "暂无关联文件",
+      "playback_title": "推演回放",
+      "playback_hint": "Step3「开始模拟」与 Step5「深度互动」需在运行中启动，不支持历史回放",
+      "step1": "图谱构建",
+      "step2": "环境搭建",
+      "step4": "分析报告"
+    }
+  },
+  "process": {
+    "step_name": "图谱构建",
+    "status": {
+      "error": "构建失败",
+      "completed": "构建完成",
+      "building_graph": "图谱构建中",
+      "generating_ontology": "本体生成中",
+      "initializing": "初始化中"
+    },
+    "graph": {
+      "title": "实时知识图谱",
+      "nodes": "节点",
+      "edges": "关系",
+      "refresh": "刷新图谱",
+      "fullscreen": "全屏显示",
+      "exit_fullscreen": "退出全屏",
+      "building_hint": "实时更新中...",
+      "loading": "图谱数据加载中...",
+      "waiting_ontology": "等待本体生成",
+      "waiting_hint": "生成完成后将自动开始构建图谱",
+      "building": "图谱构建中",
+      "building_hint2": "数据即将显示...",
+      "waiting_data": "等待图谱数据..."
+    },
+    "details": {
+      "node_title": "节点详情",
+      "edge_title": "关系",
+      "name": "名称",
+      "uuid": "UUID",
+      "created": "创建时间",
+      "properties": "属性",
+      "summary": "摘要",
+      "labels": "标签",
+      "source": "源节点",
+      "target": "目标节点",
+      "label": "标签",
+      "type": "类型",
+      "fact": "事实",
+      "episodes": "片段",
+      "valid_from": "生效时间",
+      "invalid_at": "失效时间",
+      "expired_at": "过期时间"
+    },
+    "build": {
+      "title": "构建流程",
+      "phase1_title": "本体生成",
+      "phase1_desc": "上传文档后，LLM分析文档内容，自动生成适合舆论模拟的本体结构（实体类型 + 关系类型）",
+      "phase1_progress": "生成进度",
+      "phase1_progress_message": "正在分析文档并生成本体...",
+      "phase1_entity_types": "生成的实体类型",
+      "phase1_relation_types": "生成的关系类型",
+      "phase1_more_relations": "+{count} 更多关系...",
+      "phase1_waiting": "等待本体生成...",
+      "phase2_title": "图谱构建",
+      "phase2_desc": "基于生成的本体，将文档分块后调用 Zep API 构建知识图谱，提取实体和关系",
+      "phase2_waiting": "等待本体生成完成...",
+      "phase2_progress": "构建进度",
+      "phase2_result": "构建结果",
+      "phase2_nodes": "实体节点",
+      "phase2_edges": "关系边",
+      "phase2_entity_types": "实体类型",
+      "phase3_title": "构建完成",
+      "phase3_desc": "准备进入下一步骤",
+      "next_step": "进入环境搭建"
+    },
+    "project": {
+      "title": "项目信息",
+      "name": "项目名称",
+      "id": "项目ID",
+      "graph_id": "图谱ID",
+      "requirement": "模拟需求"
+    },
+    "status_text": {
+      "completed": "已完成",
+      "active": "进行中",
+      "pending": "等待中"
+    },
+    "no_files_error": "没有待上传的文件，请返回首页重新操作"
+  },
+  "main": {
+    "view": {
+      "graph": "图谱",
+      "split": "双栏",
+      "workbench": "工作台"
+    },
+    "steps": {
+      "step1": "图谱构建",
+      "step2": "环境搭建",
+      "step3": "开始模拟",
+      "step4": "报告生成",
+      "step5": "深度互动"
+    },
+    "status": {
+      "error": "错误",
+      "ready": "就绪",
+      "building": "构建中",
+      "generating": "生成中",
+      "initializing": "初始化中"
+    },
+    "log": {
+      "entering_step": "进入步骤 {step}: {name}",
+      "custom_rounds": "自定义模拟轮数: {rounds} 轮"
+    }
+  },
+  "graph_panel": {
+    "title": "图谱关系可视化",
+    "refresh": "刷新",
+    "maximize": "最大化/还原",
+    "simulating_hint": "GraphRAG长短期记忆实时更新中",
+    "updating_hint": "实时更新中...",
+    "finished_hint": "还有少量内容处理中，建议稍后手动刷新图谱",
+    "close_hint": "关闭提示",
+    "node_details": "节点详情",
+    "relationship": "关系",
+    "name": "名称",
+    "uuid": "UUID",
+    "created": "创建时间",
+    "properties": "属性",
+    "summary": "摘要",
+    "labels": "标签",
+    "fact": "事实",
+    "type": "类型",
+    "episodes": "片段",
+    "valid_from": "生效时间",
+    "self_relations": "自循环关系",
+    "items": "项",
+    "related": "相关",
+    "loading": "图谱数据加载中...",
+    "waiting": "等待本体生成...",
+    "entity_types": "实体类型",
+    "show_edge_labels": "显示边标签"
+  }
+}
